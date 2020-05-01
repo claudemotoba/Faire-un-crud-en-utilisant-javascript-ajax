@@ -24,7 +24,6 @@ checkbox.addEventListener('click', function () {
 boutonValider.addEventListener('click', function(e){
     
         e.preventDefault();
-
         // value recovery
        
         
@@ -37,6 +36,62 @@ boutonValider.addEventListener('click', function(e){
         const state = document.querySelector('#state');
         const country = document.querySelector('#country');
         tbody.textContent = ' ';
+
+        //error handling
+
+        const erreurPrenom = document.querySelector('#erreurPrenom');
+        const nameError = document.querySelector('#nameError');
+        const mailError = document.querySelector('#mailError');
+        const postError = document.querySelector('#postError');
+        const numberError = document.querySelector('#numberError');
+        const stateError = document.querySelector('#stateError');
+        const countryError = document.querySelector('#countryError');
+            
+            if (!firstName.value.length) {
+                erreurPrenom.innerText = 'Ce champ est obligatoire'
+            }else{
+                erreurPrenom.innerText = ' '
+            };
+            
+            if (!name.value.length) {
+                nameError.innerText = 'Ce champ est obligatoire'
+            }else{
+                nameError.innerText = ' '
+            }
+            
+            if (!email.value.length) {
+                mailError.innerText = 'Ce champ est obligatoire'
+            }else{
+                mailError.innerText =''
+            }
+            
+            if (!post.value.length) {
+                postError.innerText = 'Ce champ est obligatoire'
+            }else{
+                postError.innerText =''
+            }
+            
+            if (!number.value.length) {
+                numberError.innerText = 'Ce champ est obligatoire'
+            }else{
+                numberError.innerText =''
+            }
+            
+            if (!state.value.length) {
+                stateError.innerText = 'Ce champ est obligatoire'
+            }else{
+                stateError.innerText =''
+            }
+            
+            if (!country.value.length) {
+                countryError.innerText = 'Ce champ est obligatoire'
+            }else{
+                countryError.innerText =''
+            }
+
+        // si toutes les cases sont remplit
+
+        if (firstName.value.length && name.value.length && email.value.length && post.value.length && number.value.length && state.value.length && country.value.length) {
             
             // Generer un nombre aleatoire pour le matricule
 
@@ -100,4 +155,5 @@ boutonValider.addEventListener('click', function(e){
             }
 
             reinitialisation()
+        }   
 })
