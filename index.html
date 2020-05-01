@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>MAPENDO sarl</title>
     <style>
@@ -14,77 +15,79 @@
     </style>
 </head>
 <body>
-    <div class="parent">
-        <form class="ui form">
-            <h2 class="ui dividing header">MAPENDO sarl</h2> <br>
-         <div class="two fields">
-            <div class="field">
+    <div>
+        <form class="col s12">
+            <div class="col s12 m7"><h2 class="header">MAPENDO sarl</h2> <br></div>
+            
+         <div class="row">
+            <div class="input-field col s6">
+                <i class="far fa-id-badge material-icons prefix color"></i>
+                <input id="identifiant" type="text"><br>
+                <label>ID</label>
+                <span class="erreur" id="erreurIdentifiant"></span>
+            </div>
+            <div class="input-field col s6">
+                <i class="fas fa-user material-icons prefix color"></i>
+                <input id="firstName" type="text"  class="validate icon_prefix"><br>
                 <label>Prenom</label>
-                <input id="firstName" type="text" placeholder="Votre prenom"><br>
                 <span class="erreur" id="erreurPrenom"></span>
             </div>
-            <div class="field">
+         </div>
+         <div class="row">
+            <div class="input-field col s6">
+                <i class="fas fa-user material-icons prefix color"></i>
+                <input id="names" type="text"><br>
                 <label>Nom</label>
-                <input id="name" type="text" placeholder="Votre nom de famille"><br>
                 <span class="erreur" id="nameError"></span>
             </div>
-         </div>
-         <div class="two fields">
-            <div class="field">
+            <div class="input-field col s6">
+                <i class="far fa-envelope material-icons prefix color"></i>
+                <input id="email" type="email"><br>
                 <label>Email</label>
-                <input id="email" type="email" placeholder="votre email"><br>
                 <span class="erreur" id="mailError"></span>
             </div>
-            <div class="field">
-                <label>Age</label>
-                <input id="old" type="text" placeholder="Votre Age"><br>
-                <span class="erreurs" id="oldError"></span>
-            </div>
          </div>
-         <div class="two fields">
-            <div class="field">
-                <label>Poste</label>
-                <select class='search dropdown' id="post" size="1">
+         <div class="row">
+            <div class="input-field col s6">
+                <select class="form-control form-control-lg" id="post"  size="1">
                     <option value="">Sélectionner votre poste</option>
-                    <option value="Directeur">Directeur</option>
-                    <option value="Dev back-End">Developpeur(se) back-End</option>
-                    <option value="Dev front-End">Developpeur(se) front-End</option>
-                    <option value="Dev fullstack">Developpeur(se) fullstack</option>
-                    <option value="Graphiste">Graphiste</option>
+                    <option value="Homme de ménage">Homme de ménage</option>
+                    <option value="Architecte infrastructures">Architecte infrastructures</option>
+                    <option value="DevOPS & Développeuse Fullstack">DevOPS & Développeuse Fullstack</option>
+                    <option value="Administrateur systèmes & Réseaux">Administrateur systèmes & Réseaux</option>
+                    <option value="Chef de projet digital">Chef de projet digital</option>
                     <option value="Gardien(e)">Gardien</option>
-                    <option value="communication">Charge de communication</option>
+                    <option value="Administrateur systèmes & Réseaux">Administrateur systèmes & Réseaux</option>
                     <option value="Comptabilite">Comptabilite</option>
                 </select>
                 <span class="erreur" id="postError"></span>
             </div>
-            <div class="field">
+            <div class="input-field col s6">
+                <i class="fas fa-phone-volume material-icons prefix color"></i>
+                <input id="number" type="text"><br>
                 <label>Numero de telephone</label>
-                <input id="number" type="text" placeholder="Votre Numero de telephone"><br>
                 <span class="erreur" id="numberError"></span>
             </div>
          </div>
-         <div class="two fields">
-            <div class="field">
-                <label>Statut marital</label>
-                <select class='search dropdown' id="state" size="1">
+         <div class="row">
+            <div class="input-field col s6">
+                <select class='form-control form-control-lg' id="state" size="1">
                     <option value="">Sélectionner votre statut</option>
-                    <option value="Marié(e)">Marié(e)</option>
-                    <option value="Divorcé(e)">Divorcé(e)</option>
-                    <option value="Célibataire">Célibataire</option>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
                 </select>
                 <span class="erreur" id="stateError"></span>
             </div>
-            <div class="field">
-                <label>Pays d'origine</label>
-                <select class="ui search dropdown" id="country">
+            <div class="input-field col s6">
+                <select class="form-control form-control-lg" id="country">
                     <option value="">Sélectionner un pays</option>
                     <option value="Afghanistan">Afghanistan</option>
-                    <option value="RDC">Republique democratique du congo</option>
+                    <option value="RDCongo">RDCongo</option>
                     <option value="France">France</option>
-                    <option value="Algeria">Algeria</option>
-                    <option value="Angola">Angola</option>
+                    <option value="Suisse">Suisse</option>
+                    <option value="Liban">Liban</option>
                     <option value="Argentina">Argentina</option>
-                    <option value="Allemagne">Allemagne</option>
+                    <option value="Djibouti">Djibouti</option>
                     <option value="Italie">Italie</option>
                     <option value="Belgique">Belgique</option>
                     <option value="Chine">Chine</option>
@@ -94,9 +97,9 @@
                     <option value="Mexique">Mexique</option>
                     <option value="Afrique du sud">Afrique du sud</option>
                     <option value="Suisse">Suisse</option>
-                    <option value="GB">Royaume uni</option>
+                    <option value="Inde">Inde</option>
                     <option value="USA">United States of america</option>
-                    <option value="Egypte">Egypte</option>
+                    <option value="Algérie">Algérie</option>
                     <option value="Cameroun">Cameroun</option>
                     <option value="ZM">Egypte</option>
                     <option value="Zimbabwe">Zimbabwe</option>
@@ -104,26 +107,27 @@
                 <span class="erreur" id="countryError"></span>
             </div>
          </div>
-            <div class="field">
-                <div class="ui checkbox">
-                    <input type="checkbox" name="checkbox" id="checkbox">
-                    <label>J'accepte les termes & conditions</label>
+            <div>
+                <div>
+                    <label>
+                    <input type="checkbox" id="checkbox"> 
+                    <span id="checkboxContent">J'accepte les termes & conditions</span>
+                    </label> 
                 </div>
             </div>
-            <button id="btn" type="submit" class="ui primary button">Valider</button>
-            <button id="maj" class='ui primary button'>Mettre a jour</button>
-            <input type="reset" value="Reinitialiser" id="reinitialiser" class='ui primary button'>
+            <button id="btn" type="submit" class="waves-effect waves-light btn-large">Valider</button>
+            <button id="maj" class='waves-effect waves-light btn-large'>Mettre a jour</button>
+            <input type="reset" value="Réinitialiser" id="reinitialiser" class='waves-effect waves-light btn-large'>
         </form> <br> <br>
-        <div>
-            <h2 class="ui dividing header">Liste des employes</h2>
-            <table class="table">
+        <div class="table-responsive">
+            <h2>Liste des employes</h2>
+            <table class="responsive-table">
              <thead class="thead-dark">
                 <tr>
-                    <th>Matricule</th>
+                    <th>Identifiant</th>
                     <th>Prenom</th>
                     <th>Nom</th>
                     <th>Email</th>
-                    <th>Age</th>
                     <th>Poste</th>
                     <th>Tel</th>
                     <th>Statut marital</th>
@@ -139,6 +143,5 @@
     <script src="https://kit.fontawesome.com/957ae1f962.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>
