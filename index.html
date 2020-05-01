@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>MAPENDO sarl</title>
     <style>
@@ -111,12 +112,12 @@
             </div>
             <button id="btn" type="submit" class="ui primary button">Valider</button>
             <button id="maj" class='ui primary button'>Mettre a jour</button>
-
+            <input type="reset" value="Reinitialiser" id="reinitialiser" class='ui primary button'>
         </form> <br> <br>
         <div>
             <h2 class="ui dividing header">Liste des employes</h2>
-            <table class="ui compact celled definition table">
-             <thead>
+            <table class="table">
+             <thead class="thead-dark">
                 <tr>
                     <th>Matricule</th>
                     <th>Prenom</th>
@@ -135,6 +136,8 @@
             </table> 
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/957ae1f962.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
     <script src="app.js"></script>
 </body>
