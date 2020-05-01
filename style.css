@@ -18,11 +18,27 @@ label {
 
 th{
     padding: 20px;
+    border-collapse: collapse;
 }
 
 table{
     max-width: 100%;
+    font-size: 15px;
 }
-#btn{
-    display: none;
+body{
+    margin: 50px 50px 50px 50px;
 }
+h2{
+    text-align: center;
+}
+#checkboxContent{
+    font-size: 20px;
+}
+thead{
+    background-color: #26a69a;
+    color: white;
+}
+.color{
+    color: #26a69a;
+}
+

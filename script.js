@@ -7,9 +7,17 @@ const tbody = document.querySelector('#tbody');
 const form = document.querySelector('.ui');
 const boutonreinitialiser = document.querySelector('#reinitialiser')
 const users = []
+const identifiant = document.querySelector('#identifiant')
 
-boutonMettreAjour.style.display = 'none'
-boutonreinitialiser.style.display = 'none'
+// Recuperation des inputs
+
+const firstName = document.querySelector('#firstName')
+const names = document.querySelector('#names')
+const email = document.querySelector('#email')
+const post = document.querySelector('#post');
+const number = document.querySelector('#number');
+const state = document.querySelector('#state');
+const country = document.querySelector('#country');
 
 // checkbox area
 
@@ -21,32 +29,156 @@ checkbox.addEventListener('click', function () {
     }else{
         boutonValider.style.display = 'none';
     }
+}) 
+
+boutonValider.style.display = 'none'
+boutonMettreAjour.style.display = 'none'
+boutonreinitialiser.style.display = 'none'
+identifiant.setAttribute('readOnly', 'true')
+
+var monObjet = {
+    firstName: firstName.value,
+    names: names.value,
+    email: email.value,
+    post: post.value,
+    number: number.value,
+    state: state.value,
+    country: country.value,
+}
+
+users.push(monObjet)
+
+nouvelEmploye()
+
+function nouvelEmploye() {
+    axios.get('http://167.71.45.243:4000/api/employes?api_key=xjsljqa').then(function(response){
+     const createEmploye = () =>{
+        //console.log(response.data);
+        for ( property of response.data) {
+            const a = `<tr>
+                        <td>${property._id}</td>
+                        <td>${property.prenom}</td>
+                        <td>${property.nom}</td>
+                        <td>${property.email}</td>
+                        <td>${property.poste}</td>
+                        <td>${property.numeroTelephone}</td>
+                        <td>${property.estMarie}</td>
+                        <td>${property.pays}</td>
+                        <td><button type='button' class="bt-${property._id} btn btn-primary"><i class="fas fa-edit"></i></button><input type='hidden' value="${property}"></td>
+                        <td><button id="btn-${property._id}" type='button' class="btn btn-danger"><i class="fas fa-trash-alt"></i></button><input type='hidden' value="${property}"></td></tr>`
+                        tbody.insertAdjacentHTML('beforeend', a);
+
+
+                        const btnDelete = document.querySelector(`#btn-${property._id}`);
+                        btnDelete.style.backgroundColor = 'red';
+                        const employeID = property._id;
+                        btnDelete.addEventListener('click', function() {
+
+                        // affichage d'un alert
+
+                            if (confirm(
+                                `Etes-vous sûr de vouloir supprimer cet employé`
+                            )){       
+                                axios.delete(`http://167.71.45.243:4000/api/employes/${employeID}?api_key=xjsljqa`).then(function(response) {
+                                console.log(response);
+                                }).catch(function(erreur) {
+                                    console.log(erreur);
+                                })
+                            }
+                        
+                        });
+
+                            const btnModifier = document.querySelector(`.bt-${property._id}`)
+                            btnModifier.style.backgroundColor = 'blue';
+                            const idEmploye = property._id
+                            //console.log(btnModifier);
+                            
+                            btnModifier.addEventListener('click', function () {
+                                identifiant.style.display = 'inherit';
+                                identifiant.setAttribute('readOnly', 'true')
+                                axios.get(`http://167.71.45.243:4000/api/employes/${idEmploye}?api_key=xjsljqa`).then(function(response) {
+                                    
+                                    identifiant.value = response.data._id;
+                                    firstName.value =  response.data.prenom;
+                                    names.value = response.data.nom;
+                                    email.value = response.data.email;
+                                    post.value = response.data.poste;
+                                    number.value = response.data.numeroTelephone;
+                                    state.value = response.data.estMarie;
+                                    country.value = response.data.pays;
+                                    checkbox.checked = true;
+                                    boutonValider.style.display = 'none';
+                                    boutonMettreAjour.style.display = 'inline';
+                                }).catch(function(erreur) {
+                                    console.log(erreur);
+                                })
+                                // checkbox
+            
+                                checkbox.addEventListener('click', function () {
+                                    if (checkbox.checked) {
+                                        boutonValider.style.display = 'none'
+                                        boutonMettreAjour.style.display = 'inline';
+                                    }else{
+                                        boutonMettreAjour.style.display = 'none';
+                                    }
+                                })
+
+                                
+                            })
+                    
+        }
+     }
+     createEmploye()
+    }).catch(function(erreur){
+    console.log(erreur)
+    })
+
+}
+
+boutonMettreAjour.addEventListener('click', function (e) {
+    e.preventDefault()
+    
+    const userId = identifiant.value;
+    axios.put(`http://167.71.45.243:4000/api/employes/${userId}?api_key=xjsljqa`, {    
+        prenom: firstName.value,
+        nom: names.value,
+        email: email.value,
+        poste: post.value,
+        numeroTelephone: number.value,
+        estMarie: state.value,
+        pays: country.value}).then(function(response) {
+
+            // checkbox 
+
+            boutonMettreAjour.style.display = 'none';
+            checkbox.checked = true;
+
+            checkbox.addEventListener('click', function () {
+                if (checkbox.checked) {
+                    boutonValider.style.display = 'inline';    
+                }else{
+                    boutonValider.style.display = 'none';
+                }
+            })
+
+    }).catch(function(erreur) {
+        console.log(erreur);
+    })
+
+
 })
-// Beginning of the event
+
+// Creation d'un nouvel enregistrement
 
 boutonValider.addEventListener('click', function(e){
     
         e.preventDefault();
-
-        // value recovery
           
-        const firstName = document.querySelector('#firstName')
-        const name = document.querySelector('#name')
-        const email = document.querySelector('#email')
-        const old = document.querySelector('#old');
-        const post = document.querySelector('#post');
-        const number = document.querySelector('#number');
-        const state = document.querySelector('#state');
-        const country = document.querySelector('#country');
-        
-
         //error handling
 
         const erreurPrenom = document.querySelector('#erreurPrenom');
         const nameError = document.querySelector('#nameError');
-        const mailError = document.querySelector('#mailError');
         const postError = document.querySelector('#postError');
-        const numberError = document.querySelector('#numberError');
         const stateError = document.querySelector('#stateError');
         const countryError = document.querySelector('#countryError');
             
@@ -56,28 +188,16 @@ boutonValider.addEventListener('click', function(e){
                 erreurPrenom.innerText = ' '
             };
             
-            if (!name.value.length) {
+            if (!names.value.length) {
                 nameError.innerText = 'Ce champ est obligatoire'
             }else{
                 nameError.innerText = ' '
-            }
-            
-            if (!email.value.length) {
-                mailError.innerText = 'Ce champ est obligatoire'
-            }else{
-                mailError.innerText =''
             }
             
             if (!post.value.length) {
                 postError.innerText = 'Ce champ est obligatoire'
             }else{
                 postError.innerText =''
-            }
-            
-            if (!number.value.length) {
-                numberError.innerText = 'Ce champ est obligatoire'
-            }else{
-                numberError.innerText =''
             }
             
             if (!state.value.length) {
@@ -92,150 +212,33 @@ boutonValider.addEventListener('click', function(e){
                 countryError.innerText =''
             }
 
+
         // si toutes les cases sont remplit
 
-        if (firstName.value.length && name.value.length && email.value.length && post.value.length && number.value.length && state.value.length && country.value.length) {
-            
-            // Generer un nombre aleatoire pour le matricule
+        if (firstName.value.length && names.value.length && post.value.length && state.value.length && country.value.length) {
 
-            function nombreAleatoir () {
-                return Math.floor(Math.random() * 1678404); 
-            }
-
-            // creation d'un objet
-
-            let monObjet = {
-                id: nombreAleatoir(),
-                firstName: firstName.value,
-                name: name.value,
+            let objetApi ={
+                prenom: firstName.value,
+                nom: names.value,
                 email: email.value,
-                old: old.value,
-                post: post.value,
-                number: number.value,
-                state: state.value,
-                country: country.value,
+                poste: post.value,
+                numeroTelephone: number.value,
+                estMarie: state.value,
+                pays: country.value, 
             }
 
-            users.push(monObjet)
-
-            // Ajouter des elements dans le tableau
-
-            const AjouterUnEmployer = ()=>{
-                tbody.textContent = ' ';
-                for (let i = 0; i < users.length; i++) {
-                    const htmlSTRING = 
-                                      `<tr id="row-${users[i].id}">
-                                        <td>${users[i].id}</td>
-                                        <td>${users[i].firstName}</td>
-                                        <td>${users[i].name}</td>
-                                        <td>${users[i].email}</td>
-                                        <td>${users[i].old}</td>
-                                        <td>${users[i].post}</td>
-                                        <td>${users[i].number}</td>
-                                        <td>${users[i].state}</td>
-                                        <td>${users[i].country}</td>
-                                        <td><button type='button' class="bt-${users[i].id}"><i class="fas fa-edit"></i></button><input type='hidden' value="${i}"></td>
-                                        <td><button id="btn-${users[i].id}" type='button'><i class="fas fa-trash-alt"></i></button><input type='hidden' value="${i}"></td></tr>`;
-
-                            tbody.insertAdjacentHTML('beforeend', htmlSTRING);
-
-                            // bouton supprimer
-
-                            const btnDelete = document.querySelector(`#btn-${users[i].id}`);
-                            const employeID = users[i].id;
-                            btnDelete.addEventListener('click', function() {
-
-                                // affichage d'un alert
-
-                                if (confirm(
-                                    `Etes-vous sûr de supprimer l'employé ${monObjet.firstName}  ${monObjet.name}`
-                                  )){
-                                        const tr = document.querySelector(`#row-${users[i].id}`);
-                                        console.log('TBODY : ', tbody);
-                                        console.log('TR : ', tr);
-                                        tbody.removeChild(tr);
-                                        for (let i = 0; i < users.length; i++) {
-                                            if (users[i].id === employeID) {
-                                                users.splice(i, 1);
-                                            }
-                                        }         
-                                }
-                                
-                            });
-
-                            // btn Modifier
-
-                            const btnModifier = document.querySelector(`.bt-${users[i].id}`)
-                            console.log(btnModifier);
-                            
-                            btnModifier.addEventListener('click', function () {
-                                firstName.value =  monObjet.firstName;
-                                name.value = monObjet.name;
-                                email.value = monObjet.email;
-                                old.value = monObjet.old;
-                                post.value = monObjet.post;
-                                number.value = monObjet.number;
-                                state.value = monObjet.state;
-                                country.value = monObjet.country;
-                                checkbox.checked = true;
-                                boutonValider.style.display = 'none';
-                                boutonMettreAjour.style.display = 'inline';
-                            })
-
-                            // checkbox
+            console.log(objetApi);
             
-                            checkbox.addEventListener('click', function () {
-                                if (checkbox.checked) {
-                                    boutonMettreAjour.style.display = 'inline';
-                                    boutonValider.style.display = 'none'
-                                }else{
-                                    boutonMettreAjour.style.display = 'none';
-                                }
-                            })
-                }
-            }
+            axios.post(`http://167.71.45.243:4000/api/employes/?api_key=xjsljqa`, objetApi).then(function(response) {
+                console.log(response.data);
 
-            AjouterUnEmployer()
+                
 
-            form.reset();
+            }).catch(function(erreur) {
+                console.log(erreur);
+            })
 
-                // button mettre a jour
 
-                boutonMettreAjour.addEventListener('click', function (e) {
-                    e.preventDefault()
-
-                    let index= users.findIndex(a => a.id === nombreAleatoir())
-                    users.splice(index, 1, {
-                             id: nombreAleatoir(),
-                        firstName: firstName.value,
-                        name: name.value,
-                        email: email.value,
-                        old: old.value,
-                        post: post.value,
-                        number: number.value,
-                        state: state.value,
-                        country: country.value
-                    })
-                    console.log(index);
-
-                    AjouterUnEmployer()
-
-                    // checkbox 
-
-                    boutonMettreAjour.style.display = 'none';
-
-                    checkbox.addEventListener('click', function () {
-                        if (checkbox.checked) {
-                            boutonMettreAjour.style.display = 'none';
-                            boutonValider.style.display = 'inline';    
-                        }else{
-                            boutonValider.style.display = 'none';
-                        }
-                    })
-                    boutonreinitialiser.style.display = 'inline';
-                    boutonreinitialiser.addEventListener('click', function () {
-                        boutonreinitialiser.style.display = 'none';
-                    })
-                })
+                
         }   
 })
