@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>MAPENDO sarl</title>
+    <style>
+        .erreur{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <form class="ui form">
+            <h2 class="ui dividing header">MAPENDO sarl</h2> <br>
+         <div class="two fields">
+            <div class="field">
+                <label>Prenom</label>
+                <input id="firstName" type="text" placeholder="Votre prenom"><br>
+                <span class="erreur" id="erreurPrenom"></span>
+            </div>
+            <div class="field">
+                <label>Nom</label>
+                <input id="name" type="text" placeholder="Votre nom de famille"><br>
+                <span class="erreur" id="nameError"></span>
+            </div>
+         </div>
+         <div class="two fields">
+            <div class="field">
+                <label>Email</label>
+                <input id="email" type="email" placeholder="votre email"><br>
+                <span class="erreur" id="mailError"></span>
+            </div>
+            <div class="field">
+                <label>Age</label>
+                <input id="old" type="text" placeholder="Votre Age"><br>
+                <span class="erreurs" id="oldError"></span>
+            </div>
+         </div>
+         <div class="two fields">
+            <div class="field">
+                <label>Poste</label>
+                <select class='search dropdown' id="post" size="1">
+                    <option value="">Sélectionner votre poste</option>
+                    <option value="Directeur">Directeur</option>
+                    <option value="Dev back-End">Developpeur(se) back-End</option>
+                    <option value="Dev front-End">Developpeur(se) front-End</option>
+                    <option value="Dev fullstack">Developpeur(se) fullstack</option>
+                    <option value="Graphiste">Graphiste</option>
+                    <option value="Gardien(e)">Gardien</option>
+                    <option value="communication">Charge de communication</option>
+                    <option value="Comptabilite">Comptabilite</option>
+                </select>
+                <span class="erreur" id="postError"></span>
+            </div>
+            <div class="field">
+                <label>Numero de telephone</label>
+                <input id="number" type="text" placeholder="Votre Numero de telephone"><br>
+                <span class="erreur" id="numberError"></span>
+            </div>
+         </div>
+         <div class="two fields">
+            <div class="field">
+                <label>Statut marital</label>
+                <select class='search dropdown' id="state" size="1">
+                    <option value="">Sélectionner votre statut</option>
+                    <option value="Marié(e)">Marié(e)</option>
+                    <option value="Divorcé(e)">Divorcé(e)</option>
+                    <option value="Célibataire">Célibataire</option>
+                </select>
+                <span class="erreur" id="stateError"></span>
+            </div>
+            <div class="field">
+                <label>Pays d'origine</label>
+                <select class="ui search dropdown" id="country">
+                    <option value="">Sélectionner un pays</option>
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="RDC">Republique democratique du congo</option>
+                    <option value="France">France</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Allemagne">Allemagne</option>
+                    <option value="Italie">Italie</option>
+                    <option value="Belgique">Belgique</option>
+                    <option value="Chine">Chine</option>
+                    <option value="Japon">Japon</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Espagne">Espagne</option>
+                    <option value="Mexique">Mexique</option>
+                    <option value="Afrique du sud">Afrique du sud</option>
+                    <option value="Suisse">Suisse</option>
+                    <option value="GB">Royaume uni</option>
+                    <option value="USA">United States of america</option>
+                    <option value="Egypte">Egypte</option>
+                    <option value="Cameroun">Cameroun</option>
+                    <option value="ZM">Egypte</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                <span class="erreur" id="countryError"></span>
+            </div>
+         </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <label>J'accepte les termes & conditions</label>
+                </div>
+            </div>
+            <button id="btn" type="submit" class="ui primary button">Valider</button>
+            <button id="maj" class='ui primary button'>Mettre a jour</button>
+
+        </form> <br> <br>
+        <div>
+            <h2 class="ui dividing header">Liste des employes</h2>
+            <table class="ui compact celled definition table">
+             <thead>
+                <tr>
+                    <th>Matricule</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Poste</th>
+                    <th>Tel</th>
+                    <th>Statut marital</th>
+                    <th>Pays d'origine</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+             </thead>
+                <tbody id="tbody"></tbody>
+            </table> 
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

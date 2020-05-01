@@ -1,0 +1,28 @@
+.parent {
+    border: 1px solid #cacbcd;
+    border-radius: .28571429rem;
+    width: 93%;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-border-radius: .28571429rem;
+    -moz-border-radius: .28571429rem;
+    -ms-border-radius: .28571429rem;
+    -o-border-radius: .28571429rem;
+}
+
+label {
+    text-align: start;
+}
+
+th{
+    padding: 20px;
+}
+
+table{
+    max-width: 100%;
+}
+#btn{
+    display: none;
+}
