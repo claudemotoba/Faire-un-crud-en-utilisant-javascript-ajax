@@ -48,12 +48,9 @@ var monObjet = {
 
 users.push(monObjet)
 
-nouvelEmploye()
-
 function nouvelEmploye() {
     axios.get('http://167.71.45.243:4000/api/employes?api_key=xjsljqa').then(function(response){
-     const createEmploye = () =>{
-        //console.log(response.data);
+     //const createEmploye = () =>{
         for ( property of response.data) {
             const a = `<tr>
                         <td>${property._id}</td>
@@ -62,12 +59,11 @@ function nouvelEmploye() {
                         <td>${property.email}</td>
                         <td>${property.poste}</td>
                         <td>${property.numeroTelephone}</td>
-                        <td>${property.estMarie}</td>
+                        <td>${property.etatMarital}</td>
                         <td>${property.pays}</td>
                         <td><button type='button' class="bt-${property._id} btn btn-primary"><i class="fas fa-edit"></i></button><input type='hidden' value="${property}"></td>
                         <td><button id="btn-${property._id}" type='button' class="btn btn-danger"><i class="fas fa-trash-alt"></i></button><input type='hidden' value="${property}"></td></tr>`
                         tbody.insertAdjacentHTML('beforeend', a);
-
 
                         const btnDelete = document.querySelector(`#btn-${property._id}`);
                         btnDelete.style.backgroundColor = 'red';
@@ -91,7 +87,6 @@ function nouvelEmploye() {
                             const btnModifier = document.querySelector(`.bt-${property._id}`)
                             btnModifier.style.backgroundColor = 'blue';
                             const idEmploye = property._id
-                            //console.log(btnModifier);
                             
                             btnModifier.addEventListener('click', function () {
                                 identifiant.style.display = 'inherit';
@@ -104,7 +99,7 @@ function nouvelEmploye() {
                                     email.value = response.data.email;
                                     post.value = response.data.poste;
                                     number.value = response.data.numeroTelephone;
-                                    state.value = response.data.estMarie;
+                                    state.value = response.data.etatMarital;
                                     country.value = response.data.pays;
                                     checkbox.checked = true;
                                     boutonValider.style.display = 'none';
@@ -127,13 +122,14 @@ function nouvelEmploye() {
                             })
                     
         }
-     }
-     createEmploye()
+     //}
+     //createEmploye()
     }).catch(function(erreur){
     console.log(erreur)
     })
 
 }
+nouvelEmploye()
 
 boutonMettreAjour.addEventListener('click', function (e) {
     e.preventDefault()
@@ -145,9 +141,8 @@ boutonMettreAjour.addEventListener('click', function (e) {
         email: email.value,
         poste: post.value,
         numeroTelephone: number.value,
-        estMarie: state.value,
+        etatMarital: state.value,
         pays: country.value}).then(function(response) {
-
             // checkbox 
 
             boutonMettreAjour.style.display = 'none';
@@ -161,12 +156,14 @@ boutonMettreAjour.addEventListener('click', function (e) {
                 }
             })
 
+            
     }).catch(function(erreur) {
         console.log(erreur);
     })
 
 
 })
+
 
 // Creation d'un nouvel enregistrement
 
@@ -223,7 +220,7 @@ boutonValider.addEventListener('click', function(e){
                 email: email.value,
                 poste: post.value,
                 numeroTelephone: number.value,
-                estMarie: state.value,
+                etatMarital: state.value,
                 pays: country.value, 
             }
 
